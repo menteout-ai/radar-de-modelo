@@ -1,4 +1,4 @@
-# Radar de Modelo 0.2.0
+# Radar de Modelo 0.2.1
 
 Antes de cada respuesta, el modelo entiende el trabajo que le pides y lo compara con el modelo y el esfuerzo en uso.
 Si no encajan, te hace una pregunta Sí/No con el motivo en una línea, por ejemplo:
