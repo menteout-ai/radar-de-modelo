@@ -1,5 +1,0 @@
-{
-  "name": "radar-de-modelo",
-  "owner": { "name": "menteout-ai" },
-  "plugins": [{ "name": "radar-de-modelo", "source": "./" }]
-}
