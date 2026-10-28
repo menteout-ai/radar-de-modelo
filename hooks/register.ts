@@ -58,14 +58,19 @@ export const register: Register = on => {
   on('prompt.submit', async ($, e, next) => {
     if (e.command || e.isMeta) return next(e)
 
-    const id = await $.session.model()
-    const modelo = nombreModelo(id)
-    const nivel = nombreNivel(esfuerzo)
-    const context = [...(e.context ?? []), REGLA(modelo, nivel)]
+    // Si algo falla, el mensaje sigue su camino sin tocar: el mod nunca bloquea un prompt.
+    try {
+      const id = await $.session.model()
+      const modelo = nombreModelo(id)
+      const nivel = nombreNivel(esfuerzo)
+      const context = [...(e.context ?? []), REGLA(modelo, nivel)]
 
-    const p = pista(e.text, (e.attachments?.length ?? 0) > 0)
-    if (p) context.push(`[Radar de Modelo] ${p}`)
+      const p = pista(e.text, (e.attachments?.length ?? 0) > 0)
+      if (p) context.push(`[Radar de Modelo] ${p}`)
 
-    return next({ ...e, context })
+      return next({ ...e, context })
+    } catch {
+      return next(e)
+    }
   })
 }
